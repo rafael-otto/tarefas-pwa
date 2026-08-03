@@ -1,8 +1,5 @@
-import { fileURLToPath, URL } from "node:url";
-
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import vueDevTools from "vite-plugin-vue-devtools";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
@@ -11,7 +8,6 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        id: "com.tarefas-pwa",
         name: "Gerenciador de Tarefas",
         short_name: "Tarefas",
         description: "Aplicativo PWA para gerenciar tarefas diárias",
@@ -39,15 +35,6 @@ export default defineConfig({
           },
         ],
       },
-      devOptions: {
-        enabled: true,
-      },
     }),
-    vueDevTools(),
   ],
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-    },
-  },
 });
