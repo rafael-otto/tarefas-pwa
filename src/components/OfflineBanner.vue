@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { useOnlineStatus } from '@/composables/useOnlineStatus';
+import { useOnlineStatus } from '/src/composables/useOnlineStatus.js';
 
 const { isOnline } = useOnlineStatus();
 </script>
