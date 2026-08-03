@@ -1,8 +1,6 @@
 <template>
     <div>
-        <div v-if="store.error" class="error-message">{{ store.error }}
-            <button @click="store.fetchTasks()">Tentar novamente</button>
-        </div>
+        <p v-if="store.error" class="error-message">{{ store.error }}</p>
 
         <TaskForm :editing-task="editingTask" @add="handleAdd" @update="handleUpdate" @cancel="handleCancel" />
 
@@ -10,17 +8,13 @@
 
         <template v-else>
             <section v-if="store.pendingTasks.length > 0">
-                <h2 class="section-title">
-                    Pendentes ({{ store.pendingTasks.length }})
-                </h2>
+                <h2 class="section-title">Pendentes ({{ store.pendingTasks.length }})</h2>
                 <TaskItem v-for="task in store.pendingTasks" :key="task.id" :task="task" @toggle="handleToggle"
                     @remove="handleRemove" @edit="handleEdit" />
             </section>
 
             <section v-if="store.completedTasks.length > 0">
-                <h2 class="section-title">
-                    Concluídas ({{ store.completedTasks.length }})
-                </h2>
+                <h2 class="section-title">Concluídas ({{ store.completedTasks.length }})</h2>
                 <TaskItem v-for="task in store.completedTasks" :key="task.id" :task="task" @toggle="handleToggle"
                     @remove="handleRemove" @edit="handleEdit" />
             </section>
@@ -35,43 +29,48 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import TaskForm from '../components/TaskForm.vue';
-import TaskItem from '../components/TaskItem.vue';
-import InstallButton from '../components/InstallButton.vue';
-import { useTasksStore } from '../stores/tasks.js';
+import { onMounted, ref } from 'vue'
+import TaskForm from '../components/TaskForm.vue'
+import TaskItem from '../components/TaskItem.vue'
+import InstallButton from '../components/InstallButton.vue'
+import { useTasksStore } from '../stores/tasks.js'
 
-const store = useTasksStore();
-const editingTask = ref(null);
+const store = useTasksStore()
+const editingTask = ref(null)
 
 onMounted(() => {
-    store.fetchTasks();
-});
+    store.fetchTasks()
+})
 
 function handleAdd(title) {
-    store.addTask(title);
+    store.addTask(title)
 }
 
-function handleUpdate(id, title) {
-    store.updateTaskTitle(id, title);
-    editingTask.value = null;
+function handleUpdate(id, title, imgAttachmentKey, removeImage) {
+    console.log("Home:", removeImage)
+    store.updateTask(id, {
+        title,
+        imgAttachmentKey,
+        removeImage,
+    })
+    editingTask.value = null
 }
 
 function handleCancel() {
-    editingTask.value = null;
+    editingTask.value = null
 }
 
 function handleEdit(task) {
-    editingTask.value = task;
+    editingTask.value = task
 }
 
 function handleToggle(id) {
-    store.toggleTask(id);
+    store.toggleTask(id)
 }
 
 function handleRemove(id) {
-    if (editingTask.value?.id === id) editingTask.value = null;
-    store.removeTask(id);
+    if (editingTask.value?.id === id) editingTask.value = null
+    store.removeTask(id)
 }
 </script>
 
@@ -104,29 +103,5 @@ function handleRemove(id) {
     color: #666;
     font-size: 0.9rem;
     padding: 8px 0;
-}
-
-.filtro-pesquisa {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.error-message button {
-    margin-left: 10px;
-    padding: 4px 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-}
-
-.error-message button:hover {
-    background-color: #2980b9;
 }
 </style>
