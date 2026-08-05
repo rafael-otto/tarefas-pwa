@@ -1,41 +1,32 @@
 <template>
     <header class="app-header">
-        <h1>Tarefas</h1>
+        <h1>Meus gestor de Tarefas!!!!</h1>
         <nav>
             <router-link to="/">Início</router-link>
             <router-link to="/about">Sobre</router-link>
+            <div v-if="authStore.isAuthenticated" class="user-info">
+
+                <span v-if="authStore.userEmail" class="user-email">
+                    {{ authStore.userEmail }}
+                </span>
+                <button class="logout-btn" @click="handleLogout">
+                    Sair
+                </button>
+
+            </div>
         </nav>
     </header>
 </template>
 
-<style scoped>
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-    border-bottom: 2px solid #4a90d9;
-    margin-bottom: 24px;
-}
+<script setup>
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '/src/stores/auth.js';
 
-.app-header h1 {
-    font-size: 1.4rem;
-    color: #4a90d9;
-}
+const router = useRouter();
+const authStore = useAuthStore();
 
-nav {
-    display: flex;
-    gap: 16px;
+function handleLogout() {
+    authStore.logout();
+    router.push('/login');
 }
-
-nav a {
-    text-decoration: none;
-    color: #666;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-nav a.router-link-active {
-    color: #4a90d9;
-}
-</style>
+</script>

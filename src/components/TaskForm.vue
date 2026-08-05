@@ -13,10 +13,7 @@
         <div v-if="editingTask" class="image-section">
             <img v-if="previewUrl || editingTask.img_url" :src="previewUrl || editingTask.img_url" class="image-preview"
                 alt="Imagem da tarefa" />
-                <button v-if="editingTask.img_url && previewUrl === null" type="button" class="task-button-remove-image"
-                @click="handleRemoveImage">
-                Remover imagem
-            </button>
+                <!-- <button v-if="editingTask.img_url && previewUrl === null" type="button" class="task-button-remove-image" @click="handleRemoveImage">Remover imagem</button> -->
             <label class="image-label" :class="{ disabled: uploading }">
                 <span v-if="uploading" class="upload-status">Enviando...</span>
                 <span v-else>
