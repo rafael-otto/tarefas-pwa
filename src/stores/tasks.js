@@ -24,11 +24,11 @@ export const useTasksStore = defineStore('tasks', () => {
         }
     }
 
-    async function addTask(title) {
-        if (!title.trim()) return
-        error.value = null
+    async function addTask(payload) {
+        if (!payload.title?.trim()) return;
+        error.value = null;
         try {
-            const response = await tasksApi.create(title.trim())
+            const response = await tasksApi.create(payload)
             tasks.value.push(response.data)
         } catch (err) {
             error.value = 'Erro ao adicionar tarefa.'
@@ -61,21 +61,27 @@ export const useTasksStore = defineStore('tasks', () => {
         }
     }
 
-    async function updateTask(id, { title, imgAttachmentKey, removeImage } = {}) {
-        if (title !== undefined && !title.trim()) return
-        error.value = null
-        const payload = {}
-        if (title !== undefined) payload.title = title.trim()
-        if (imgAttachmentKey != null) payload.img_attachment_key = imgAttachmentKey
-        if (removeImage) payload.img_attachment_key = null
-        console.log("tasks:", payload)
+    async function updateTask(id, payload) {
+        if (!payload.title?.trim()) return;
+        error.value = null;
+        const data = {
+            title: payload.title.trim(),
+        };
+        if (payload.imgAttachmentKey) {
+            data.img_attachment_key = payload.imgAttachmentKey;
+        }
+        if (payload.removeImage) {
+            data.img_attachment_key = null;
+        }
         try {
-            const response = await tasksApi.update(id, payload)
-            const index = tasks.value.findIndex((t) => t.id === id)
-            if (index !== -1) tasks.value[index] = response.data
+            const response = await tasksApi.update(id, data);
+            const index = tasks.value.findIndex((t) => t.id === id);
+            if (index !== -1) {
+                tasks.value[index] = response.data;
+            }
         } catch (err) {
-            error.value = 'Erro ao editar tarefa.'
-            console.error(err)
+            error.value = 'Erro ao editar tarefa.';
+            console.error(err);
         }
     }
 

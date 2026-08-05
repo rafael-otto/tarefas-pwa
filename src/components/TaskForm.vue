@@ -10,21 +10,26 @@
             </button>
         </div>
 
-        <div v-if="editingTask" class="image-section">
-            <img v-if="previewUrl || editingTask.img_url" :src="previewUrl || editingTask.img_url" class="image-preview"
-                alt="Imagem da tarefa" />
+        <div class="image-section">
+            <img v-if="previewUrl || editingTask?.img_url" :src="previewUrl || editingTask?.img_url"
+                class="image-preview" alt="Imagem da tarefa" />
                 <!-- <button v-if="editingTask.img_url && previewUrl === null" type="button" class="task-button-remove-image" @click="handleRemoveImage">Remover imagem</button> -->
             <label class="image-label" :class="{ disabled: uploading }">
                 <span v-if="uploading" class="upload-status">Enviando...</span>
-                <span v-else>
-                    {{ previewUrl || editingTask.img_url
-                        ? 'Trocar imagem'
-                        : 'Adicionar imagem'
-                    }}
-                </span>
-                <input type="file" accept="image/jpeg,image/png" class="image-input" :disabled="uploading"
-                    @change="handleImageChange" />
+                <span v-else>Adicionar imagem</span>
+                <input type="file" accept="image/jpeg,image/png" capture="environment" class="image-input"
+                    :disabled="uploading" @change="handleImageChange" />
             </label>
+
+            <!-- Alternativa com preview ao vivo -->
+            <button type="button" class="task-button-secondary" @click="showCameraCapture = !showCameraCapture">
+                {{ showCameraCapture ? 'Fechar câmera' : 'Abrir preview ao vivo' }}
+            </button>
+            <p class="image-help">
+                Em celular, o botão pode abrir a câmera.
+                Em notebook, abre o seletor de arquivos.
+            </p>
+            <CameraCapture v-if="showCameraCapture" @captured="handleCameraCapture" />
         </div>
     </form>
 </template>
@@ -32,6 +37,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import tasksApi from '../api/tasksApi.js'
+import CameraCapture from './CameraCapture.vue'
 
 const props = defineProps({
     editingTask: {
@@ -46,11 +52,13 @@ const previewUrl = ref(null)
 const imgAttachmentKey = ref(null)
 const uploading = ref(false)
 const removeImage = ref(false)
+const showCameraCapture = ref(false)
 
 watch(
     () => props.editingTask,
     (task) => {
         newTask.value = task ? task.title : ''
+        if (previewUrl.value) URL.revokeObjectURL(previewUrl.value);
         previewUrl.value = null
         imgAttachmentKey.value = null
         removeImage.value = false
@@ -60,6 +68,7 @@ watch(
 async function handleImageChange(event) {
     const file = event.target.files[0]
     if (!file) return
+    if (previewUrl.value) URL.revokeObjectURL(previewUrl.value);
     previewUrl.value = URL.createObjectURL(file)
     uploading.value = true
     try {
@@ -83,31 +92,51 @@ function handleRemoveImage() {
 }
 
 function handleSubmit() {
-    if (!newTask.value.trim()) return
-    console.log("Tasksubmit:", removeImage.value)
+    if (!newTask.value.trim()) return;
+    const payload = {
+        title: newTask.value.trim(),
+        imgAttachmentKey: imgAttachmentKey.value,
+        removeImage: removeImage.value,
+    };
     if (props.editingTask) {
-        emit(
-            'update',
-            props.editingTask.id,
-            newTask.value.trim(),
-            imgAttachmentKey.value,
-            removeImage.value
-        )
+        emit('update', props.editingTask.id, payload);
     } else {
-        emit('add', newTask.value.trim())
+        emit('add', payload);
     }
-    newTask.value = ''
-    previewUrl.value = null
-    imgAttachmentKey.value = null
-    removeImage.value = false
+    newTask.value = '';
+    if (previewUrl.value) {
+        URL.revokeObjectURL(previewUrl.value);
+    }
+    previewUrl.value = null;
+    imgAttachmentKey.value = null;
+    removeImage.value = false;
 }
 
 function handleCancel() {
     newTask.value = ''
+    if (previewUrl.value) URL.revokeObjectURL(previewUrl.value);
     previewUrl.value = null
     imgAttachmentKey.value = null
     emit('cancel')
 }
+
+function handleCameraCapture(file) {
+    previewUrl.value = URL.createObjectURL(file);
+    uploading.value = true;
+    tasksApi
+        .uploadImage(file)
+        .then((response) => {
+            imgAttachmentKey.value = response.data.attachment_key;
+        })
+        .catch((err) => {
+            console.error(err);
+            previewUrl.value = null;
+        })
+        .finally(() => {
+            uploading.value = false;
+        });
+}
+
 </script>
 
 <style scoped>
@@ -232,5 +261,12 @@ function handleCancel() {
 
 .task-button-remove-image:hover {
     background: #fdecea;
+}
+
+.image-help {
+    font-size: 0.75rem;
+    color: #999;
+    margin: 0;
+    flex-basis: 100%;
 }
 </style>
