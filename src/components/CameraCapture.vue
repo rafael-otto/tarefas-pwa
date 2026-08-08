@@ -114,15 +114,15 @@ function stopCamera() {
 .camera-capture {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .camera-preview {
     width: 100%;
     max-height: 300px;
     object-fit: contain;
-    background: #000;
-    border-radius: 8px;
+    background: #000000;
+    border-radius: 20px;
 }
 
 .camera-preview.hidden {
@@ -133,36 +133,56 @@ function stopCamera() {
     width: 100%;
     max-height: 300px;
     object-fit: contain;
-    border-radius: 8px;
-    border: 2px solid #4a90d9;
+    border-radius: 20px;
+    border: 2px solid #3182ce;
 }
 
 .camera-actions {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .camera-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 20px;
     font-size: 0.875rem;
+    font-weight: 600;
     cursor: pointer;
-    background: #4a90d9;
-    color: white;
+    background-color: #3182ce;
+    color: #ffffff;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.camera-btn:hover {
+    background-color: #2b6cb0;
 }
 
 .camera-btn.secondary {
-    background: #6c757d;
+    background-color: #718096;
+}
+
+.camera-btn.secondary:hover {
+    background-color: #4a5568;
 }
 
 .camera-btn.danger {
-    background: #e74c3c;
+    background-color: #e53e3e;
+}
+
+.camera-btn.danger:hover {
+    background-color: #c53030;
 }
 
 .camera-error {
-    color: #e74c3c;
+    color: #c53030;
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    padding: 10px 16px;
+    border-radius: 16px;
     font-size: 0.85rem;
+    text-align: center;
 }
 </style>

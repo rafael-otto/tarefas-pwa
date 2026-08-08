@@ -55,16 +55,16 @@ function dismiss() {
     bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    width: min(480px, calc(100vw - 2rem));
-    background: #fff;
+    width: min(448px, calc(100% - 32px));
+    background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    padding: 1rem 1.25rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 1.25rem;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.85rem;
 }
 
 .prompt-content {
@@ -81,11 +81,12 @@ function dismiss() {
 .prompt-text strong {
     display: block;
     font-size: 0.95rem;
-    color: #1a202c;
+    font-weight: 700;
+    color: #2d3748;
 }
 
 .prompt-text p {
-    margin: 0.2rem 0 0;
+    margin: 0.25rem 0 0;
     font-size: 0.85rem;
     color: #718096;
     line-height: 1.4;
@@ -98,26 +99,38 @@ function dismiss() {
 }
 
 .btn-allow {
-    padding: 0.4rem 1rem;
-    background: #4a90d9;
-    color: #fff;
+    padding: 8px 16px;
+    background-color: #3182ce;
+    color: #ffffff;
     border: none;
-    border-radius: 6px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-allow:hover {
+    background-color: #2b6cb0;
 }
 
 .btn-dismiss {
-    padding: 0.4rem 1rem;
-    background: transparent;
+    padding: 8px 16px;
+    background-color: transparent;
     color: #718096;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
+    border: 1px solid #cbd5e0;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
-/* Animação slide-up */
+.btn-dismiss:hover {
+    background-color: #f7fafc;
+    border-color: #a0aec0;
+}
+
 .slide-up-enter-active,
 .slide-up-leave-active {
     transition: all 0.3s ease;

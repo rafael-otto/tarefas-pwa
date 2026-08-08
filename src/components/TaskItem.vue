@@ -52,26 +52,29 @@ function closeImage() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
-    background-color: white;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.2s;
-    gap: 10px;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+    gap: 12px;
+    width: 100%;
 }
 
 .task-thumbnail {
     width: 44px;
     height: 44px;
     object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #eee;
+    border-radius: 10px;
+    border: 1px solid #cbd5e0;
     flex-shrink: 0;
 }
 
 .task-item.done {
-    opacity: 0.6;
+    opacity: 0.65;
+    background-color: #f7fafc;
 }
 
 .task-label {
@@ -80,83 +83,106 @@ function closeImage() {
     gap: 12px;
     cursor: pointer;
     flex: 1;
+    min-width: 0;
 }
 
 .task-label input[type='checkbox'] {
     width: 20px;
     height: 20px;
-    accent-color: #4a90d9;
+    accent-color: #3182ce;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 .task-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    color: #2d3748;
+    word-break: break-word;
 }
 
 .task-item.done .task-title {
     text-decoration: line-through;
-    color: #999;
-}
-
-.task-remove {
-    background: none;
-    border: none;
-    color: #e74c3c;
-    cursor: pointer;
-    font-size: 0.85rem;
-    padding: 4px 8px;
-}
-
-.task-remove:hover {
-    text-decoration: underline;
+    color: #a0aec0;
 }
 
 .task-actions {
     display: flex;
     gap: 4px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .task-edit {
-    background: none;
+    background: transparent;
     border: none;
-    color: #4a90d9;
+    color: #3182ce;
     cursor: pointer;
     font-size: 0.85rem;
-    padding: 4px 8px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
 }
 
 .task-edit:hover {
-    text-decoration: underline;
+    background-color: #ebf8ff;
+}
+
+.task-remove {
+    background: transparent;
+    border: none;
+    color: #e53e3e;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.task-remove:hover {
+    background-color: #fff5f5;
 }
 
 .image-button {
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #4a90d9;
-    padding: 4px;
+    color: #3182ce;
+    padding: 6px;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
 }
 
 .image-button:hover {
-    color: #2c6cb0;
-}
-
-.task-image {
-    max-width: 500px;
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
+    background-color: #ebf8ff;
 }
 
 dialog {
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    max-width: calc(100% - 32px);
+    width: 100%;
+    margin: auto;
 }
 
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.task-image {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    object-fit: contain;
 }
 </style>

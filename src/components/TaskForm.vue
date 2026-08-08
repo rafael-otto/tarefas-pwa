@@ -25,10 +25,6 @@
             <button type="button" class="task-button-secondary" @click="showCameraCapture = !showCameraCapture">
                 {{ showCameraCapture ? 'Fechar câmera' : 'Abrir preview ao vivo' }}
             </button>
-            <p class="image-help">
-                Em celular, o botão pode abrir a câmera.
-                Em notebook, abre o seletor de arquivos.
-            </p>
             <CameraCapture v-if="showCameraCapture" @captured="handleCameraCapture" />
         </div>
     </form>
@@ -146,94 +142,103 @@ function handleCameraCapture(file) {
 
 .task-row {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 12px;
 }
 
 .task-input {
     flex: 1;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e0;
+    border-radius: 20px;
+    font-size: 0.95rem;
     outline: none;
-    transition: border-color 0.2s;
+    color: #2d3748;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .task-input:focus {
-    border-color: #4a90d9;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
 }
 
 .task-button {
-    padding: 12px 20px;
-    background-color: #4a90d9;
-    color: white;
+    padding: 12px 16px;
+    background-color: #3182ce;
+    color: #ffffff;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 
 .task-button:hover:not(:disabled) {
-    background-color: #357abd;
+    background-color: #2b6cb0;
 }
 
 .task-button:disabled {
-    opacity: 0.6;
+    background-color: #a0aec0;
     cursor: not-allowed;
 }
 
 .task-button-cancel {
-    padding: 12px 16px;
+    padding: 12px 18px;
     background-color: transparent;
-    color: #666;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
+    color: #718096;
+    border: 1px solid #cbd5e0;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .task-button-cancel:hover {
-    border-color: #aaa;
+    background-color: #f7fafc;
+    border-color: #a0aec0;
 }
 
 .image-section {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    padding: 10px 12px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px dashed #ccc;
+    padding: 16px;
+    background-color: #f7fafc;
+    border-radius: 20px;
+    border: 2px dashed #e2e8f0;
 }
 
 .image-preview {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #ddd;
+    border-radius: 12px;
+    border: 1px solid #cbd5e0;
     flex-shrink: 0;
 }
 
 .image-label {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 8px 14px;
-    background: white;
-    border: 1.5px solid #4a90d9;
-    color: #4a90d9;
-    border-radius: 6px;
+    padding: 8px 16px;
+    background-color: #ffffff;
+    border: 1px solid #3182ce;
+    color: #3182ce;
+    border-radius: 20px;
     font-size: 0.875rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .image-label:hover:not(.disabled) {
-    background: #eaf2fb;
+    background-color: #ebf8ff;
 }
 
 .image-label.disabled {
@@ -245,28 +250,55 @@ function handleCameraCapture(file) {
     display: none;
 }
 
+.task-button-secondary {
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #4a5568;
+    border: 1px solid #cbd5e0;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.task-button-secondary:hover {
+    background-color: #edf2f7;
+    color: #2d3748;
+}
+
 .upload-status {
-    color: #888;
+    color: #718096;
 }
 
 .task-button-remove-image {
-    padding: 8px 14px;
-    background: transparent;
-    border: 1px solid #e74c3c;
-    color: #e74c3c;
-    border-radius: 6px;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid #feb2b2;
+    color: #e53e3e;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .task-button-remove-image:hover {
-    background: #fdecea;
+    background-color: #fff5f5;
+    border-color: #fc8181;
 }
 
 .image-help {
     font-size: 0.75rem;
-    color: #999;
+    color: #a0aec0;
     margin: 0;
-    flex-basis: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.image-section> :deep(.camera-capture),
+.image-section>.camera-capture {
+    width: 100%;
+    margin-top: 8px;
 }
 </style>

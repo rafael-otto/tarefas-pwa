@@ -70,33 +70,62 @@ function handleRemove(id) {
 </script>
 
 <style scoped>
+div {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    color: #2c3e50;
+}
+
 .section-title {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 12px;
-    margin-top: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #3182ce;
+    background-color: #ebf8ff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    margin-bottom: 16px;
+}
+
+.error-message {
+    color: #c53030;
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.loading-message {
+    color: #718096;
+    font-size: 0.95rem;
+    padding: 16px 0;
+    text-align: center;
+    font-style: italic;
 }
 
 .empty-message {
     text-align: center;
-    color: #999;
-    margin-top: 40px;
+    color: #718096;
+    margin-top: 32px;
+    padding: 32px 16px;
+    background-color: #f7fafc;
+    border: 2px dashed #e2e8f0;
+    border-radius: 20px;
     font-size: 0.95rem;
 }
 
-.error-message {
-    color: #c0392b;
-    background-color: #fdecea;
-    border: 1px solid #e74c3c;
-    border-radius: 6px;
-    padding: 10px 14px;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-}
-
-.loading-message {
-    color: #666;
-    font-size: 0.9rem;
-    padding: 8px 0;
+section {
+    margin-bottom: 24px;
 }
 </style>

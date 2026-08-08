@@ -12,16 +12,12 @@ let deferredPrompt = null;
 
 onMounted(() => {
     window.addEventListener('beforeinstallprompt', (event) => {
-        // Impede o banner automático do navegador
         event.preventDefault();
-        // Armazena o evento para usar depois
         deferredPrompt = event;
-        // Mostra o botão customizado
         showInstallButton.value = true;
     });
 
     window.addEventListener('appinstalled', () => {
-        // Esconde o botão quando o app for instalado
         showInstallButton.value = false;
         deferredPrompt = null;
     });
@@ -29,17 +25,11 @@ onMounted(() => {
 
 async function installApp() {
     if (!deferredPrompt) return;
-
-    // Mostra o prompt de instalação do navegador
     deferredPrompt.prompt();
-
-    // Aguarda a resposta do usuário
     const { outcome } = await deferredPrompt.userChoice;
-
     if (outcome === 'accepted') {
         showInstallButton.value = false;
     }
-
     deferredPrompt = null;
 }
 </script>
@@ -48,15 +38,17 @@ async function installApp() {
 .install-button {
     display: block;
     width: 100%;
-    padding: 14px;
-    margin-top: 20px;
+    padding: 12px 16px;
+    margin-top: 16px;
     background-color: #27ae60;
-    color: white;
+    color: #ffffff;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
+    text-align: center;
 }
 
 .install-button:hover {

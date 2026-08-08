@@ -9,6 +9,17 @@ export const useAuthStore = defineStore('auth', () => {
 
     const isAuthenticated = computed(() => !!accessToken.value)
 
+    const userEmail = computed(() => {
+        if (!accessToken.value) return null
+
+        try {
+            const payload = JSON.parse(atob(accessToken.value.split('.')[1]))
+            return payload.sub ?? null
+        } catch {
+            return null
+        }
+    })
+
     const { requestPermission, subscribe, unsubscribe } = usePushNotifications()
 
     async function login(email, password) {
@@ -38,5 +49,5 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem('refresh_token')
     }
 
-    return { accessToken, refreshToken, isAuthenticated, login, logout, requestPermission, subscribe }
+    return { accessToken, refreshToken, isAuthenticated, userEmail, login, logout, requestPermission, subscribe }
 })
