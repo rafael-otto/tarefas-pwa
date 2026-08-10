@@ -174,7 +174,7 @@ function handleCameraCapture(file) {
     transition: background-color 0.2s ease;
 }
 
-.task-button:hover:not(:disabled) {
+.task-button:active:not(:disabled) {
     background-color: #2b6cb0;
 }
 
@@ -195,7 +195,7 @@ function handleCameraCapture(file) {
     transition: all 0.2s ease;
 }
 
-.task-button-cancel:hover {
+.task-button-cancel:active {
     background-color: #f7fafc;
     border-color: #a0aec0;
 }
@@ -237,15 +237,6 @@ function handleCameraCapture(file) {
     transition: all 0.2s ease;
 }
 
-.image-label:hover:not(.disabled) {
-    background-color: #ebf8ff;
-}
-
-.image-label.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
 .image-input {
     display: none;
 }
@@ -262,7 +253,7 @@ function handleCameraCapture(file) {
     transition: all 0.2s ease;
 }
 
-.task-button-secondary:hover {
+.task-button-secondary:active {
     background-color: #edf2f7;
     color: #2d3748;
 }
@@ -283,7 +274,7 @@ function handleCameraCapture(file) {
     transition: all 0.2s ease;
 }
 
-.task-button-remove-image:hover {
+.task-button-remove-image:active {
     background-color: #fff5f5;
     border-color: #fc8181;
 }

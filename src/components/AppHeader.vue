@@ -82,7 +82,7 @@ function handleLogout() {
     transition: all 0.2s ease;
 }
 
-.app-header nav a:hover {
+.app-header nav a:active {
     color: #3182ce;
     background-color: #ebf8ff;
 }
@@ -106,7 +106,7 @@ function handleLogout() {
     transition: all 0.2s ease;
 }
 
-.logout-btn:hover {
+.logout-btn:active {
     background-color: #fff5f5;
     border-color: #fc8181;
 }

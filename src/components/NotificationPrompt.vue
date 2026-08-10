@@ -110,7 +110,7 @@ function dismiss() {
     transition: background-color 0.2s ease;
 }
 
-.btn-allow:hover {
+.btn-allow:active {
     background-color: #2b6cb0;
 }
 
@@ -126,7 +126,7 @@ function dismiss() {
     transition: all 0.2s ease;
 }
 
-.btn-dismiss:hover {
+.btn-dismiss:active {
     background-color: #f7fafc;
     border-color: #a0aec0;
 }

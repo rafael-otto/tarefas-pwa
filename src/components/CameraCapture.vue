@@ -156,7 +156,7 @@ function stopCamera() {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.camera-btn:hover {
+.camera-btn:active {
     background-color: #2b6cb0;
 }
 
@@ -164,7 +164,7 @@ function stopCamera() {
     background-color: #718096;
 }
 
-.camera-btn.secondary:hover {
+.camera-btn.secondary:active {
     background-color: #4a5568;
 }
 
@@ -172,7 +172,7 @@ function stopCamera() {
     background-color: #e53e3e;
 }
 
-.camera-btn.danger:hover {
+.camera-btn.danger:active {
     background-color: #c53030;
 }
 

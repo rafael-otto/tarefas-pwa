@@ -1,12 +1,7 @@
 <template>
     <div class="task-item" :class="{ done: task.done }">
         <button v-if="task.img_url" class="image-button" @click="showImage">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8
-            a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                <circle cx="12" cy="13" r="4" />
-            </svg>
+            <img v-if="task.img_url" :src="task.img_url" class="task-thumbnail" alt="Imagem da tarefa" />
         </button>
 
         <dialog ref="imageDialog">
@@ -124,7 +119,7 @@ function closeImage() {
     transition: background-color 0.2s ease;
 }
 
-.task-edit:hover {
+.task-edit:active {
     background-color: #ebf8ff;
 }
 
@@ -140,7 +135,7 @@ function closeImage() {
     transition: background-color 0.2s ease;
 }
 
-.task-remove:hover {
+.task-remove:active {
     background-color: #fff5f5;
 }
 
@@ -156,7 +151,7 @@ function closeImage() {
     transition: background-color 0.2s ease;
 }
 
-.image-button:hover {
+.image-button:active {
     background-color: #ebf8ff;
 }
 

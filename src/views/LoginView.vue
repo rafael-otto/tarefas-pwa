@@ -147,10 +147,6 @@ button[type="submit"] {
     margin-top: 8px;
 }
 
-button[type="submit"]:hover:not(:disabled) {
-    background-color: #2b6cb0;
-}
-
 button[type="submit"]:disabled {
     background-color: #a0aec0;
     cursor: not-allowed;
@@ -196,7 +192,7 @@ button[type="submit"]:disabled {
     transition: background-color 0.2s ease;
 }
 
-.register-link a:hover {
+.register-link a:active {
     background-color: #ebf8ff;
 }
 </style>

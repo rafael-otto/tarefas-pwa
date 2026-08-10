@@ -162,15 +162,6 @@ button[type="submit"] {
     margin-top: 8px;
 }
 
-button[type="submit"]:hover:not(:disabled) {
-    background-color: #2b6cb0;
-}
-
-button[type="submit"]:disabled {
-    background-color: #a0aec0;
-    cursor: not-allowed;
-}
-
 .error-message {
     background-color: #fff5f5;
     color: #c53030;
@@ -199,7 +190,7 @@ button[type="submit"]:disabled {
     transition: background-color 0.2s ease;
 }
 
-.login-link a:hover {
+.login-link a:active {
     background-color: #ebf8ff;
 }
 </style>

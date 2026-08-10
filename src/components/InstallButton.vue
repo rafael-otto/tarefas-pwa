@@ -51,7 +51,7 @@ async function installApp() {
     text-align: center;
 }
 
-.install-button:hover {
+.install-button:active {
     background-color: #219a52;
 }
 </style>
