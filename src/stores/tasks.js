@@ -61,27 +61,50 @@ export const useTasksStore = defineStore('tasks', () => {
         }
     }
 
-    async function updateTask(id, payload) {
-        if (!payload.title?.trim()) return;
-        error.value = null;
-        const data = {
-            title: payload.title.trim(),
-        };
-        if (payload.imgAttachmentKey) {
-            data.img_attachment_key = payload.imgAttachmentKey;
+    async function updateTask(id, options = {}) {
+        const {
+            title,
+            imgAttachmentKey,
+            removeImage,
+            latitude,
+            longitude,
+            geolocation_accuracy,
+            geolocation_timestamp,
+            location_label,
+        } = options
+
+        if (title !== undefined && !title.trim()) return
+
+        error.value = null
+
+        const payload = {
+            ...(title !== undefined && { title: title.trim() }),
+            ...(removeImage && { img_attachment_key: null }),
+            ...(!removeImage &&
+                imgAttachmentKey != null && {
+                img_attachment_key: imgAttachmentKey,
+            }),
+            ...Object.fromEntries(
+                Object.entries({
+                    latitude,
+                    longitude,
+                    geolocation_accuracy,
+                    geolocation_timestamp,
+                    location_label,
+                }).filter(([, value]) => value !== undefined),
+            ),
         }
-        if (payload.removeImage) {
-            data.img_attachment_key = null;
-        }
+
         try {
-            const response = await tasksApi.update(id, data);
-            const index = tasks.value.findIndex((t) => t.id === id);
+            const response = await tasksApi.update(id, payload)
+            const index = tasks.value.findIndex(t => t.id === id)
+
             if (index !== -1) {
-                tasks.value[index] = response.data;
+                tasks.value[index] = response.data
             }
         } catch (err) {
-            error.value = 'Erro ao editar tarefa.';
-            console.error(err);
+            error.value = 'Erro ao editar tarefa.'
+            console.error(err)
         }
     }
 
